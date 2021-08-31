@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
 import useData from "../../customHooks/useData"
+import InputText from "../InputText/InputText"
+import "./Extraction.scss"
 
 var URL = ""
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
@@ -24,12 +26,16 @@ const Extraction = ({ cookie, setCookie, setUserData, setStage }) => {
   }
 
   return (
-    <>
-      Extraction {cookie} {url}
+    <div className="extraction">
+      <div className="details">
+        <InputText setValue={setUrl} value={url} label={`Linkedin profile URL`} width="320px"></InputText>
+        <InputText setValue={setCookie} value={cookie} label={`Linkedin session cookie`} width="320px"></InputText>
+      </div>
+      <div className="checkboxes"></div>
       <div>
         <button onClick={() => extractData(url, cookie)}>Extract Now</button>
       </div>
-    </>
+    </div>
   )
 }
 

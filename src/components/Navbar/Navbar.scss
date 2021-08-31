@@ -1,0 +1,46 @@
+@import "../../variables.scss";
+
+.navbar {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 15px;
+  .ringover {
+    color: $primaryBlack;
+    font-family: "Poppins";
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    font-size: 23px;
+    margin-left: 3px;
+    margin-right: 8px;
+    font-weight: 700;
+    svg {
+      width: 26px;
+      height: 26px;
+      transform: translateY(5px);
+    }
+  }
+  .user-limit {
+    font-size: 16px;
+    color: $blueShade2;
+    position: absolute;
+    left: 160px;
+    top: 7px;
+    svg {
+      width: 32px;
+      height: 32px;
+      transform: translateY(9px);
+    }
+  }
+  .cross {
+    position: absolute;
+    right: 19px;
+    top: 22px;
+    cursor: pointer;
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+}

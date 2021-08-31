@@ -1,0 +1,11 @@
+@import "../../variables.scss";
+
+.extraction {
+  margin: 32px 17px 5px 15px;
+  max-width: 390px;
+  .details {
+    .input-box {
+      margin-bottom: 15px;
+    }
+  }
+}

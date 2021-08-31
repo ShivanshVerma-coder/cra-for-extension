@@ -1,12 +1,43 @@
+@import "./variables.scss";
+html {
+  min-width: 384px;
+  min-height: 250px;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 20px;
+  background: transparent;
+  background-image: url("./assets/images/bg.png");
+  background-size: contain;
+  background-position: bottom;
+  border: 1px solid $aquamarineShade1;
+  background-position-x: -1px;
+  background-repeat: no-repeat;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 800;
-  height: 600;
+  min-width: 384px;
+  min-height: 250px;
+  color: $blackShade1;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: -0.04em;
+  padding: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
 }

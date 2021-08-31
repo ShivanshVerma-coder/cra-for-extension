@@ -1,0 +1,36 @@
+@import "../../variables.scss";
+
+.input-box {
+  position: relative;
+
+  span {
+    position: absolute;
+    cursor: pointer;
+    right: 3px;
+    top: 55%;
+    z-index: 2;
+    width: max-content;
+    // svg {
+    //   width: 15px;
+    //   height: 15px;
+    // }
+  }
+  label {
+    color: $blackShade1;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+  }
+  input {
+    z-index: 1;
+    color: $blackShade2;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 25px 8px 8px;
+    border: 1px solid #ececec;
+    &::placeholder {
+      color: $blackShade3;
+    }
+  }
+}

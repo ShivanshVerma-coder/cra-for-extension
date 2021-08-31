@@ -1,24 +1,31 @@
-import React from "react"
+import React, { useState } from "react"
+import Button from "../Button/Button"
+import "./Authentication.scss"
 
 const Authentication = ({ setStage, cookie }) => {
   console.log("cookie", cookie)
+  const [isLoading, setIsLoading] = useState(false)
+  const handleAuthenticate = () => {
+    setIsLoading(true)
+    //API request
+    setIsLoading(false)
+    setStage(2)
+  }
   return (
-    <>
+    <div className="authentication-page">
+      {cookie ? <div>Authenticate your LinkedIn account</div> : <div>Please login to LinkedIn to continue</div>}
       {cookie ? (
-        <>
-          Authentication
-          <button
-            onClick={() => {
-              setStage(2)
-            }}
-          >
-            Authenticate
-          </button>
-        </>
+        <Button
+          onClick={() => {
+            handleAuthenticate()
+          }}
+        >
+          Authenticate
+        </Button>
       ) : (
-        "Please Login To your LinkedIn"
+        <Button disabled={true}>Authenticate</Button>
       )}
-    </>
+    </div>
   )
 }
 
