@@ -6,7 +6,7 @@
   span {
     position: absolute;
     cursor: pointer;
-    right: 3px;
+    right: 10px;
     top: 55%;
     z-index: 2;
     width: max-content;
@@ -27,8 +27,9 @@
     color: $blackShade2;
     font-size: 14px;
     font-weight: 400;
-    padding: 8px 25px 8px 8px;
+    padding: 8px 30px 8px 12px;
     border: 1px solid #ececec;
+    border-radius: 8px;
     &::placeholder {
       color: $blackShade3;
     }

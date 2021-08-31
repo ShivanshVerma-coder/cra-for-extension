@@ -12,7 +12,7 @@ const Navbar = ({ showUserLimit = true }) => {
       </div>
       {showUserLimit && (
         <div className="user-limit">
-          <PeopleSVG /> 25/100
+          <PeopleSVG /> 25/1000
         </div>
       )}
       <div
