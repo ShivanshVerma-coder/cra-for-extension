@@ -3,11 +3,10 @@ html {
   min-width: 384px;
   min-height: 250px;
   margin: 0;
-  padding: 0;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   background: transparent;
   background-image: url("./assets/images/bg.png");
-  background-size: contain;
+  background-size: fixed;
   background-position: bottom;
   border: 1px solid $aquamarineShade1;
   background-position-x: -1px;

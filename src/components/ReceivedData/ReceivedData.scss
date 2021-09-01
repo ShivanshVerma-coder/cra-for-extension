@@ -1,0 +1,41 @@
+@import "../../variables.scss";
+
+.received-data {
+  margin: 25px 18px 5px 27px;
+  width: 745px;
+  .back {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 18.77px;
+    color: $blueShade1;
+    font-weight: 600;
+    font-family: "Work Sans";
+    margin-bottom: 32px;
+    width: max-content;
+    svg {
+      margin-right: 10px;
+    }
+  }
+  .basic-details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    div {
+      margin-bottom: 19px;
+    }
+  }
+  .phone-details {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 19px;
+    svg {
+      transform: translateY(10px);
+      margin-right: 40px;
+      margin-left: 16px;
+    }
+  }
+  .about {
+    margin-bottom: 35px;
+  }
+}
