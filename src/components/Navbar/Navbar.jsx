@@ -12,7 +12,7 @@ const Navbar = ({ showUserLimit = true, personalData }) => {
       </div>
       {showUserLimit && (
         <div className="user-limit">
-          <PeopleSVG /> {personalData.scrapings}/{personalData.max_scrapings}
+          <PeopleSVG /> {personalData?.scrapings}/{personalData?.max_scrapings}
         </div>
       )}
       <div

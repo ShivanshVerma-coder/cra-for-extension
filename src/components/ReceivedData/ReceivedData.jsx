@@ -97,14 +97,14 @@ const ReceivedData = ({ scrapedData, setStage }) => {
       </div>
       <div className="basic-details">
         {DATA_MAPPING.map(({ label, value, setValue }, index) => {
-          return <InputText key={index} setValue={setValue} value={value ? value : "NA"} label={label} width="238px" />
+          return <InputText key={index} setValue={setValue} value={value && value?.length !== 0 ? value : "NA"} label={label} width="238px" />
         })}
       </div>
       <div className="phone-details">
-        <InputText setValue={setPersonalPhoneNumber} value={personalPhoneNumber ? personalPhoneNumber : "NA"} label={"Personal phone number"} width="238px" />
-        <img className="qr-code" src={`https://qrcode.tec-it.com/API/QRCode?data=tel%3a${personalPhoneNumber}&backcolor=%23ffffff`} width="60px" />
-        <InputText setValue={setCompanyPhoneNumber} value={companyPhoneNumber ? companyPhoneNumber : "NA"} label={"Company phone number"} width="238px" />
-        <img className="qr-code" src={`https://qrcode.tec-it.com/API/QRCode?data=tel%3a${companyPhoneNumber}&backcolor=%23ffffff`} width="60px" />
+        <InputText setValue={setPersonalPhoneNumber} value={personalPhoneNumber && personalPhoneNumber?.length !== 0 ? personalPhoneNumber : "NA"} label={"Personal phone number"} width="238px" />
+        <img className="qr-code" src={`https://qrcode.tec-it.com/API/QRCode?data=tel%3a${personalPhoneNumber}&backcolor=%23ffffff`} alt={`QR Code`} width="60px" />
+        <InputText setValue={setCompanyPhoneNumber} value={companyPhoneNumber && companyPhoneNumber?.length !== 0 ? companyPhoneNumber : "NA"} label={"Company phone number"} width="238px" />
+        <img className="qr-code" src={`https://qrcode.tec-it.com/API/QRCode?data=tel%3a${companyPhoneNumber}&backcolor=%23ffffff`} alt={`QR Code`} width="60px" />
       </div>
       <div className="about">
         <InputTextArea setValue={setAbout} value={about ? about : "NA"} label={"About"} width="738px" />

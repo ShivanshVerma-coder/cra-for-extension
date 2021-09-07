@@ -2,6 +2,8 @@
 //register
 import { useState } from "react"
 import axios from "axios"
+import { BACKEND_URL } from "./constants"
+
 const useUser = () => {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(false)
@@ -20,7 +22,8 @@ const useUser = () => {
     setLoading(true)
     setMessage(" ")
     try {
-      const response = await axios.get(`${process.env.REACT_APP_NODE_BACKEND_URL}/users/:${cookie}`)
+      let url = `${BACKEND_URL}/users/${cookie}`
+      const response = await axios.get(url)
       const body = await response.data
       setLoading(false)
       console.log(body)
@@ -32,15 +35,16 @@ const useUser = () => {
       }
     } catch (err) {
       console.log(err)
-      setMessage(err.message)
     }
   }
 
   const register = async (cookie) => {
     setLoading(true)
     setMessage(" ")
+    console.log(cookie)
     try {
-      const response = await axios.post(`${process.env.REACT_APP_NODE_BACKEND_URL}/users`, {
+      let url = `${BACKEND_URL}/users`
+      const response = await axios.post(url, {
         cookie,
       })
       const body = await response.data

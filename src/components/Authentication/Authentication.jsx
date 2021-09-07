@@ -1,10 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import useUser from "../../customHooks/useUser"
 import Button from "../Button/Button"
 import "./Authentication.scss"
 
 const Authentication = ({ setStage, cookie, setPersonalData }) => {
-  console.log("cookie", cookie)
   const { loading, register } = useUser()
 
   const handleAuthenticate = async (cookie) => {

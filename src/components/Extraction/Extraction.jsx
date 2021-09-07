@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import useData from "../../customHooks/useData"
 import InputText from "../InputText/InputText"
 import "./Extraction.scss"
@@ -13,21 +13,24 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
   }
 })
 
-const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData, runAuthentication }) => {
-  const { getData, loading } = useData()
-  const [error, setError] = useState()
+const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData, runAuthenticate }) => {
+  const { getData } = useData()
   const [url, setUrl] = useState(URL)
   const [isIndividualCrms, setIsIndividualCrms] = useState(false)
   const [isIndividualPhoneNumbers, setIsIndividualPhoneNumbers] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const extractData = async (url, cookie, isIndividualCrms, isIndividualPhoneNumbers) => {
+    setLoading(true)
     const res = await getData({ url, cookie, userLinkedinUrl: personalData.linkedin_url, isIndividualCrms, isIndividualPhoneNumbers })
-    if (res.msg === "Successfully updated profile") {
+    if (res.msg === "Successfully scraped linkedin profile") {
       await setScrapedData(res.data)
-      await runAuthentication({ staging: false })
+      // await runAuthenticate({ cookie, staging: false })
+      await personalData.scrapings++
+      await setLoading(false)
       setStage(3)
     } else {
-      setError(true)
+      setLoading(false)
     }
   }
 
@@ -56,7 +59,7 @@ const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData,
         </div>
       </div>
       <div className="extract-button">
-        <button onClick={() => extractData(url, cookie, isIndividualCrms, isIndividualPhoneNumbers)} className={`${loading ? "active" : ""}`}>
+        <button onClick={() => (personalData.scrapings < personalData.max_scrapings ? extractData(url, cookie, isIndividualCrms, isIndividualPhoneNumbers) : "")} className={`${loading ? "active" : ""} ${personalData.scrapings === personalData.max_scrapings ? "disabled" : ""}`}>
           <span>
             {loading ? (
               <>

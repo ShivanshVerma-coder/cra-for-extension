@@ -45,6 +45,10 @@
       &.active {
         padding-left: 35px;
       }
+      &.disabled {
+        cursor: default !important;
+        opacity: 0.5;
+      }
       svg {
         position: absolute;
         margin: 0;
