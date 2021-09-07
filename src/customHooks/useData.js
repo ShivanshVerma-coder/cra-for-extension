@@ -1,39 +1,32 @@
 import { useState } from "react"
 
 const useData = () => {
-  const [cookie, setCookie] = useState()
+  const [loading, setLoading] = useState()
 
-  const getCookie = async () => {
-    await chrome.cookies.get({ url: "https://www.linkedin.com", name: "li_at" }, function (cookie) {
-      if (!cookie) {
-        return setCookie(false)
-      }
-      setCookie(cookie.value)
-    })
-  }
-
-  const getData = async (url, cookie) => {
+  const getData = async ({ url, cookie, userLinkedinUrl, isIndividualCrms, isIndividualPhoneNumbers }) => {
+    setLoading(true)
     try {
-      const response = await fetch("https://tagging-dot-apt-cubist-307713.ew.r.appspot.com/get_details", {
-        method: "post",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ url, cookie }),
+      const response = await axios.post(`${process.env.REACT_APP_NODE_BACKEND_URL}/profile`, {
+        profileLinkedinUrl: url,
+        userLinkedinUrl,
+        cookie,
+        isIndividualCrms,
+        isIndividualPhoneNumbers,
       })
-      const body = await response.json()
-      return body
-    } catch (e) {
+      const body = await response.data
+      console.log(body)
+      setLoading(false)
+      if (response.status === 200) {
+        return body
+      }
+    } catch (err) {
+      setLoading(false)
+      console.log(err)
       return false
     }
   }
 
-  return {
-    getCookie,
-    cookie,
-    setCookie,
-    getData,
-  }
+  return { loading, getData }
 }
 
 export default useData

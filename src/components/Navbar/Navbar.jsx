@@ -4,7 +4,7 @@ import { ReactComponent as CrossSVG } from "../../assets/Icons/cross.svg"
 import { ReactComponent as PeopleSVG } from "../../assets/Icons/people.svg"
 import "./Navbar.scss"
 
-const Navbar = ({ showUserLimit = true }) => {
+const Navbar = ({ showUserLimit = true, personalData }) => {
   return (
     <div className="navbar">
       <div className="ringover">
@@ -12,7 +12,7 @@ const Navbar = ({ showUserLimit = true }) => {
       </div>
       {showUserLimit && (
         <div className="user-limit">
-          <PeopleSVG /> 25/1000
+          <PeopleSVG /> {personalData.scrapings}/{personalData.max_scrapings}
         </div>
       )}
       <div

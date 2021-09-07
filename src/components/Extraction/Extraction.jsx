@@ -13,24 +13,22 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
   }
 })
 
-const Extraction = ({ cookie, setCookie, setUserData, setStage }) => {
-  const { getData, userData } = useData()
+const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData, runAuthentication }) => {
+  const { getData, loading } = useData()
   const [error, setError] = useState()
-  const [loading, setLoading] = useState()
   const [url, setUrl] = useState(URL)
-  const [individualCRM, setIndividualCRM] = useState(false)
-  const [individualPhone, setIndividualPhone] = useState(false)
+  const [isIndividualCrms, setIsIndividualCrms] = useState(false)
+  const [isIndividualPhoneNumbers, setIsIndividualPhoneNumbers] = useState(false)
 
-  const extractData = async (url, cookie) => {
-    setLoading(true)
-    const res = await getData(url, cookie)
-    if (res) {
-      await setUserData(res)
+  const extractData = async (url, cookie, isIndividualCrms, isIndividualPhoneNumbers) => {
+    const res = await getData({ url, cookie, userLinkedinUrl: personalData.linkedin_url, isIndividualCrms, isIndividualPhoneNumbers })
+    if (res.msg === "Successfully updated profile") {
+      await setScrapedData(res.data)
+      await runAuthentication({ staging: false })
       setStage(3)
     } else {
       setError(true)
     }
-    setLoading(false)
   }
 
   return (
@@ -42,23 +40,23 @@ const Extraction = ({ cookie, setCookie, setUserData, setStage }) => {
       <div className="checkboxes">
         <div
           onClick={() => {
-            setIndividualPhone(!individualPhone)
+            setIsIndividualPhoneNumbers(!isIndividualPhoneNumbers)
           }}
         >
-          {individualPhone ? <CheckedSVG /> : <UncheckedSVG />}
-          <label className={!individualPhone ? "unchecked" : ""}>Get individual phone number</label>
+          {isIndividualPhoneNumbers ? <CheckedSVG /> : <UncheckedSVG />}
+          <label className={!isIndividualPhoneNumbers ? "unchecked" : ""}>Get individual phone number</label>
         </div>
         <div
           onClick={() => {
-            setIndividualCRM(!individualCRM)
+            setIsIndividualCrms(!isIndividualCrms)
           }}
         >
-          {individualCRM ? <CheckedSVG /> : <UncheckedSVG />}
-          <label className={!individualCRM ? "unchecked" : ""}>Get individual CRM</label>
+          {isIndividualCrms ? <CheckedSVG /> : <UncheckedSVG />}
+          <label className={!isIndividualCrms ? "unchecked" : ""}>Get individual CRM</label>
         </div>
       </div>
       <div className="extract-button">
-        <button onClick={() => extractData(url, cookie)} className={`${loading ? "active" : ""}`}>
+        <button onClick={() => extractData(url, cookie, isIndividualCrms, isIndividualPhoneNumbers)} className={`${loading ? "active" : ""}`}>
           <span>
             {loading ? (
               <>
