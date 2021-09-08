@@ -6,6 +6,7 @@ import ReceivedData from "./components/ReceivedData/ReceivedData"
 import useUser from "./customHooks/useUser"
 import Navbar from "./components/Navbar/Navbar"
 import { ReactComponent as Loader } from "./assets/Icons/colored-loading.svg"
+import { PERSONAL_DATA, SCRAPED_DATA, COOKIE } from "./customHooks/constants"
 
 function App() {
   const [stage, setStage] = useState(0)
@@ -24,7 +25,10 @@ function App() {
     setAuthenticating(false)
     if (res?.msg === "Fetched user successfully") {
       setPersonalData(res.data)
-      if (staging) {
+      if (localStorage.getItem(SCRAPED_DATA) !== null) {
+        setScrapedData(JSON.parse(localStorage.getItem(SCRAPED_DATA)))
+        setStage(3)
+      } else if (staging) {
         setStage(2)
       }
     } else {
@@ -35,7 +39,9 @@ function App() {
   useEffect(() => {
     if (cookie) {
       runAuthenticate({ cookie })
-    } else {
+    }
+    if (cookie !== undefined && cookie == false) {
+      localStorage.removeItem(SCRAPED_DATA)
       setAuthenticating(false)
       setStage(1)
     }
@@ -51,7 +57,7 @@ function App() {
         <>
           <Navbar showUserLimit={stage === 1 ? false : true} personalData={personalData} />
           {stage === 1 && <Authentication setStage={setStage} cookie={cookie} setPersonalData={setPersonalData} />}
-          {stage === 2 && <Extraction setStage={setStage} cookie={cookie} setCookie={setCookie} setScrapedData={setScrapedData} personalData={personalData} runAuthenticate={runAuthenticate} />}
+          {stage === 2 && <Extraction setStage={setStage} cookie={cookie} setCookie={setCookie} setScrapedData={setScrapedData} scrapedData={scrapedData} personalData={personalData} runAuthenticate={runAuthenticate} />}
           {stage === 3 && <ReceivedData setStage={setStage} scrapedData={scrapedData} />}
         </>
       )}

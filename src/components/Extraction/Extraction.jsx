@@ -5,6 +5,7 @@ import "./Extraction.scss"
 import { ReactComponent as CheckedSVG } from "../../assets/Icons/checked.svg"
 import { ReactComponent as UncheckedSVG } from "../../assets/Icons/unchecked.svg"
 import { ReactComponent as LoadingSVG } from "../../assets/Icons/loading.svg"
+import { PERSONAL_DATA, SCRAPED_DATA } from "../../customHooks/constants"
 
 var URL = ""
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
@@ -13,7 +14,7 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
   }
 })
 
-const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData, runAuthenticate }) => {
+const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData, scrapedData }) => {
   const { getData } = useData()
   const [url, setUrl] = useState(URL)
   const [isIndividualCrms, setIsIndividualCrms] = useState(false)
@@ -25,9 +26,9 @@ const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData,
     const res = await getData({ url, cookie, userLinkedinUrl: personalData.linkedin_url, isIndividualCrms, isIndividualPhoneNumbers })
     if (res.msg === "Successfully scraped linkedin profile") {
       await setScrapedData(res.data)
-      // await runAuthenticate({ cookie, staging: false })
       await personalData.scrapings++
-      await setLoading(false)
+      localStorage.setItem(SCRAPED_DATA, JSON.stringify(res.data))
+      setLoading(false)
       setStage(3)
     } else {
       setLoading(false)
@@ -41,22 +42,26 @@ const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData,
         <InputText setValue={setCookie} value={cookie} label={`LinkedIn session cookie`} width="336px"></InputText>
       </div>
       <div className="checkboxes">
-        <div
-          onClick={() => {
-            setIsIndividualPhoneNumbers(!isIndividualPhoneNumbers)
-          }}
-        >
-          {isIndividualPhoneNumbers ? <CheckedSVG /> : <UncheckedSVG />}
-          <label className={!isIndividualPhoneNumbers ? "unchecked" : ""}>Get individual phone number</label>
-        </div>
-        <div
-          onClick={() => {
-            setIsIndividualCrms(!isIndividualCrms)
-          }}
-        >
-          {isIndividualCrms ? <CheckedSVG /> : <UncheckedSVG />}
-          <label className={!isIndividualCrms ? "unchecked" : ""}>Get individual CRM</label>
-        </div>
+        {personalData.individual_phone_numbers_option && (
+          <div
+            onClick={() => {
+              setIsIndividualPhoneNumbers(!isIndividualPhoneNumbers)
+            }}
+          >
+            {isIndividualPhoneNumbers ? <CheckedSVG /> : <UncheckedSVG />}
+            <label className={!isIndividualPhoneNumbers ? "unchecked" : ""}>Get individual phone number</label>
+          </div>
+        )}
+        {personalData.individual_crms_option && (
+          <div
+            onClick={() => {
+              setIsIndividualCrms(!isIndividualCrms)
+            }}
+          >
+            {isIndividualCrms ? <CheckedSVG /> : <UncheckedSVG />}
+            <label className={!isIndividualCrms ? "unchecked" : ""}>Get individual CRM</label>
+          </div>
+        )}
       </div>
       <div className="extract-button">
         <button onClick={() => (personalData.scrapings < personalData.max_scrapings ? extractData(url, cookie, isIndividualCrms, isIndividualPhoneNumbers) : "")} className={`${loading ? "active" : ""} ${personalData.scrapings === personalData.max_scrapings ? "disabled" : ""}`}>

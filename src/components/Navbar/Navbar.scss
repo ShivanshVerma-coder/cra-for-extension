@@ -33,6 +33,13 @@
       transform: translateY(9px);
     }
   }
+  .limit-full {
+    font-size: 12px;
+    position: fixed;
+    bottom: 81px;
+    left: 79px;
+    color: red;
+  }
   .cross {
     position: absolute;
     right: 19px;

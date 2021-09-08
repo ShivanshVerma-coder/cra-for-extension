@@ -3,6 +3,7 @@ import "./ReceivedData.scss"
 import { ReactComponent as ArrowLeft } from "../../assets/Icons/arrowLeft.svg"
 import InputText from "../InputText/InputText"
 import InputTextArea from "../InputTextArea/InputTextArea"
+import { SCRAPED_DATA } from "../../customHooks/constants"
 
 const ReceivedData = ({ scrapedData, setStage }) => {
   const [firstName, setFirstName] = useState(scrapedData["first_name"])
@@ -20,7 +21,7 @@ const ReceivedData = ({ scrapedData, setStage }) => {
   const [personalPhoneNumber, setPersonalPhoneNumber] = useState(scrapedData["individual_phone_numbers"])
   const [companyPhoneNumber, setCompanyPhoneNumber] = useState(scrapedData["company_phone_numbers"])
   const [about, setAbout] = useState(scrapedData["company_description"])
-  console.log(personalPhoneNumber)
+
   const DATA_MAPPING = [
     {
       label: "First name",
@@ -84,12 +85,17 @@ const ReceivedData = ({ scrapedData, setStage }) => {
     },
   ]
 
+  const handleBack = () => {
+    localStorage.removeItem(SCRAPED_DATA)
+    setStage(2)
+  }
+
   return (
     <div className="received-data">
       <div
         className="back"
         onClick={() => {
-          setStage(2)
+          handleBack()
         }}
       >
         <ArrowLeft />

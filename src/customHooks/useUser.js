@@ -21,6 +21,7 @@ const useUser = () => {
   const authenticate = async (cookie) => {
     setLoading(true)
     setMessage(" ")
+    console.log(cookie, "inuseuser")
     try {
       let url = `${BACKEND_URL}/users/${cookie}`
       const response = await axios.get(url)
@@ -41,7 +42,7 @@ const useUser = () => {
   const register = async (cookie) => {
     setLoading(true)
     setMessage(" ")
-    console.log(cookie)
+    console.log(cookie, "registercookie")
     try {
       let url = `${BACKEND_URL}/users`
       const response = await axios.post(url, {

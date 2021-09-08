@@ -11,9 +11,12 @@ const Navbar = ({ showUserLimit = true, personalData }) => {
         <RingoverSVG /> ringover
       </div>
       {showUserLimit && (
-        <div className="user-limit">
-          <PeopleSVG /> {personalData?.scrapings}/{personalData?.max_scrapings}
-        </div>
+        <>
+          <div className="user-limit">
+            <PeopleSVG /> {personalData?.scrapings}/{personalData?.max_scrapings}
+          </div>
+          <div className="limit-full">{personalData?.scrapings >= personalData?.max_scrapings && "You have exceeded your monthly quota."}</div>
+        </>
       )}
       <div
         className="cross"

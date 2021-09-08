@@ -1,4 +1,5 @@
 import React from "react"
+import { PERSONAL_DATA, SCRAPED_DATA } from "../../customHooks/constants"
 import useUser from "../../customHooks/useUser"
 import Button from "../Button/Button"
 import "./Authentication.scss"
@@ -10,6 +11,7 @@ const Authentication = ({ setStage, cookie, setPersonalData }) => {
     const res = await register(cookie)
     if (res.msg === "Registered user successfully") {
       await setPersonalData(res.data)
+      localStorage.removeItem(SCRAPED_DATA)
       await setStage(2)
     }
   }
