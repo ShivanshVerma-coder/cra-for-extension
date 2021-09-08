@@ -14,7 +14,7 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
   }
 })
 
-const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData, scrapedData }) => {
+const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData }) => {
   const { getData } = useData()
   const [url, setUrl] = useState(URL)
   const [isIndividualCrms, setIsIndividualCrms] = useState(false)
