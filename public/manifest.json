@@ -1,6 +1,6 @@
 {
-  "name": "Automations",
-  "description": "An automation for Ringover",
+  "name": "Contact Extractor",
+  "description": "Extension",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
@@ -19,8 +19,8 @@
     }
   ],
   "icons": {
-    "16": "logo192.png",
-    "48": "logo192.png",
-    "128": "logo192.png"
+    "16": "logo64.png",
+    "48": "logo64.png",
+    "128": "logo64.png"
   }
 }

@@ -17,10 +17,10 @@ const ReceivedData = ({ scrapedData, setStage }) => {
   const [individualCRM, setIndividualCRM] = useState(scrapedData["individiual_crms"])
   const [companyCRM, setCompanyCRM] = useState(scrapedData["company_crms"])
   const [companyLinkedInURL, setCompanyLinkedInURL] = useState(scrapedData["company_linkedin_url"])
-  const [personalPhoneNumber, setPersonalPhoneNumber] = useState(scrapedData["personal_phone_numbers"])
+  const [personalPhoneNumber, setPersonalPhoneNumber] = useState(scrapedData["individual_phone_numbers"])
   const [companyPhoneNumber, setCompanyPhoneNumber] = useState(scrapedData["company_phone_numbers"])
   const [about, setAbout] = useState(scrapedData["company_description"])
-
+  console.log(personalPhoneNumber)
   const DATA_MAPPING = [
     {
       label: "First name",
@@ -101,9 +101,9 @@ const ReceivedData = ({ scrapedData, setStage }) => {
         })}
       </div>
       <div className="phone-details">
-        <InputText setValue={setPersonalPhoneNumber} value={personalPhoneNumber && personalPhoneNumber?.length !== 0 ? personalPhoneNumber : "NA"} label={"Personal phone number"} width="238px" />
+        <InputText setValue={setPersonalPhoneNumber} value={personalPhoneNumber.length !== 0 ? personalPhoneNumber : "NA"} label={"Personal phone number"} width="238px" />
         <img className="qr-code" src={`https://qrcode.tec-it.com/API/QRCode?data=tel%3a${personalPhoneNumber}&backcolor=%23ffffff`} alt={`QR Code`} width="60px" />
-        <InputText setValue={setCompanyPhoneNumber} value={companyPhoneNumber && companyPhoneNumber?.length !== 0 ? companyPhoneNumber : "NA"} label={"Company phone number"} width="238px" />
+        <InputText setValue={setCompanyPhoneNumber} value={companyPhoneNumber.length !== 0 ? companyPhoneNumber : "NA"} label={"Company phone number"} width="238px" />
         <img className="qr-code" src={`https://qrcode.tec-it.com/API/QRCode?data=tel%3a${companyPhoneNumber}&backcolor=%23ffffff`} alt={`QR Code`} width="60px" />
       </div>
       <div className="about">
