@@ -13,7 +13,7 @@ const ReceivedData = ({ scrapedData, setStage }) => {
   const [companyURL, setCompanyURL] = useState(scrapedData["company_url"])
   const [companySize, setCompanySize] = useState(scrapedData["company_size"])
   const [location, setLocation] = useState(scrapedData["location"])
-  const [personalEmail, setPersonalEmail] = useState(scrapedData["personal_emails"])
+  const [individualEmails, setIndividualEmails] = useState(scrapedData["individual_emails"])
   const [companyEmail, setCompanyEmail] = useState(scrapedData["company_emails"])
   const [individualCRM, setIndividualCRM] = useState(scrapedData["individiual_crms"])
   const [companyCRM, setCompanyCRM] = useState(scrapedData["company_crms"])
@@ -60,8 +60,8 @@ const ReceivedData = ({ scrapedData, setStage }) => {
     },
     {
       label: "Personal email",
-      value: personalEmail,
-      setValue: setPersonalEmail,
+      value: individualEmails,
+      setValue: setIndividualEmails,
     },
     {
       label: "Company Email",

@@ -6,7 +6,14 @@ import ReceivedData from "./components/ReceivedData/ReceivedData"
 import useUser from "./customHooks/useUser"
 import Navbar from "./components/Navbar/Navbar"
 import { ReactComponent as Loader } from "./assets/Icons/colored-loading.svg"
-import { PERSONAL_DATA, SCRAPED_DATA, COOKIE } from "./customHooks/constants"
+import { SCRAPED_DATA, URL } from "./customHooks/constants"
+
+var url = ""
+chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+  if (tabs[0]["url"].includes("linkedin.com/in")) {
+    url = tabs[0]["url"]
+  }
+})
 
 function App() {
   const [stage, setStage] = useState(0)
@@ -25,7 +32,7 @@ function App() {
     setAuthenticating(false)
     if (res?.msg === "Fetched user successfully") {
       setPersonalData(res.data)
-      if (localStorage.getItem(SCRAPED_DATA) !== null) {
+      if (localStorage.getItem(SCRAPED_DATA) !== null && localStorage.getItem(URL) === url) {
         setScrapedData(JSON.parse(localStorage.getItem(SCRAPED_DATA)))
         setStage(3)
       } else if (staging) {

@@ -23,7 +23,7 @@ const useUser = () => {
     setMessage(" ")
     console.log(cookie, "inuseuser")
     try {
-      let url = `${BACKEND_URL}/users/${cookie}`
+      let url = `${process.env.REACT_APP_NODE_BACKEND_URL}/users/${cookie}`
       const response = await axios.get(url)
       const body = await response.data
       setLoading(false)
@@ -44,7 +44,7 @@ const useUser = () => {
     setMessage(" ")
     console.log(cookie, "registercookie")
     try {
-      let url = `${BACKEND_URL}/users`
+      let url = `${process.env.REACT_APP_NODE_BACKEND_URL}/users`
       const response = await axios.post(url, {
         cookie,
       })

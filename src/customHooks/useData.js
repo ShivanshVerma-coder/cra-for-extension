@@ -10,7 +10,7 @@ const useData = () => {
     const data = { profileLinkedinUrl: url, userLinkedinUrl, cookie, isIndividualCrms, isIndividualPhoneNumbers }
     console.log(data)
     try {
-      const response = await axios.post(`${BACKEND_URL}/profiles`, data)
+      const response = await axios.post(`${process.env.REACT_APP_NODE_BACKEND_URL}/profiles`, data)
       const body = await response.data
       console.log(body)
       setLoading(false)

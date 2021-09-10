@@ -5,18 +5,18 @@ import "./Extraction.scss"
 import { ReactComponent as CheckedSVG } from "../../assets/Icons/checked.svg"
 import { ReactComponent as UncheckedSVG } from "../../assets/Icons/unchecked.svg"
 import { ReactComponent as LoadingSVG } from "../../assets/Icons/loading.svg"
-import { PERSONAL_DATA, SCRAPED_DATA } from "../../customHooks/constants"
+import { SCRAPED_DATA, URL } from "../../customHooks/constants"
 
-var URL = ""
+var windowURL = ""
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-  if (tabs[0]["url"].includes("linkedin.com/in")) {
-    URL = tabs[0]["url"]
+  if (tabs[0]["url"].includes("linkedin.com/in") || tabs[0]["url"].includes("linkedin.com/company")) {
+    windowURL = tabs[0]["url"]
   }
 })
 
 const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData }) => {
   const { getData } = useData()
-  const [url, setUrl] = useState(URL)
+  const [url, setUrl] = useState(windowURL)
   const [isIndividualCrms, setIsIndividualCrms] = useState(false)
   const [isIndividualPhoneNumbers, setIsIndividualPhoneNumbers] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -28,6 +28,7 @@ const Extraction = ({ cookie, setCookie, setScrapedData, setStage, personalData 
       await setScrapedData(res.data)
       await personalData.scrapings++
       localStorage.setItem(SCRAPED_DATA, JSON.stringify(res.data))
+      localStorage.setItem(URL, url)
       setLoading(false)
       setStage(3)
     } else {
