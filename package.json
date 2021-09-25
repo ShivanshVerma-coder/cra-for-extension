@@ -2,7 +2,6 @@
   "name": "automations-extension",
   "version": "1.0.1",
   "description": "Start building an extension right-away",
-  "private": true,
   "author": "Shivansh Verma",
   "license": "MIT",
   "dependencies": {
