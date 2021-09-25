@@ -1,9 +1,16 @@
 {
-  "name": "automations-extension",
+  "name": "create-react-extension-app",
   "version": "1.0.1",
   "description": "Start building an extension right-away",
   "author": "Shivansh Verma",
   "license": "MIT",
+  "keywords": [
+    "create-react-extension-app",
+    "extension app",
+    "react extension app",
+    "starter files for react extension",
+    "extension manifest v3"
+  ],
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@testing-library/jest-dom": "^5.14.1",
