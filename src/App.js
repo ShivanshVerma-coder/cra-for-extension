@@ -1,73 +1,15 @@
 import "./App.scss"
-import React, { useState, useEffect } from "react"
-import Authentication from "./components/Authentication/Authentication"
-import Extraction from "./components/Extraction/Extraction"
-import ReceivedData from "./components/ReceivedData/ReceivedData"
-import useUser from "./customHooks/useUser"
-import Navbar from "./components/Navbar/Navbar"
-import { ReactComponent as Loader } from "./assets/Icons/colored-loading.svg"
-import { SCRAPED_DATA, URL } from "./customHooks/constants"
+import React from "react"
 
 var url = ""
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-  if (tabs[0]["url"].includes("linkedin.com/in")) {
-    url = tabs[0]["url"]
-  }
+  console.log(tabs)
 })
 
 function App() {
-  const [stage, setStage] = useState(0)
-  const { getCookie, cookie, setCookie, authenticate } = useUser()
-  const [scrapedData, setScrapedData] = useState({})
-  const [personalData, setPersonalData] = useState({})
-  const [authenticating, setAuthenticating] = useState(true)
-
-  useEffect(() => {
-    getCookie()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  const runAuthenticate = async ({ cookie, staging = true }) => {
-    setAuthenticating(true)
-    const res = await authenticate(cookie) //temporary value this will come from backend after checking if user exists
-    setAuthenticating(false)
-    if (res?.msg === "Fetched user successfully") {
-      setPersonalData(res.data)
-      if (localStorage.getItem(SCRAPED_DATA) !== null && localStorage.getItem(URL) === url) {
-        setScrapedData(JSON.parse(localStorage.getItem(SCRAPED_DATA)))
-        setStage(3)
-      } else if (staging) {
-        setStage(2)
-      }
-    } else {
-      setStage(1)
-    }
-  }
-
-  useEffect(() => {
-    if (cookie) {
-      runAuthenticate({ cookie })
-    }
-    if (cookie !== undefined && cookie == false) {
-      localStorage.removeItem(SCRAPED_DATA)
-      setAuthenticating(false)
-      setStage(1)
-    }
-  }, [cookie]) // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <div className="App">
-      {authenticating ? (
-        <div className="loader">
-          <Loader />
-        </div>
-      ) : (
-        <>
-          <Navbar showUserLimit={stage === 1 ? false : true} personalData={personalData} />
-          {stage === 1 && <Authentication setStage={setStage} cookie={cookie} setPersonalData={setPersonalData} />}
-          {stage === 2 && <Extraction setStage={setStage} cookie={cookie} setCookie={setCookie} setScrapedData={setScrapedData} scrapedData={scrapedData} personalData={personalData} runAuthenticate={runAuthenticate} />}
-          {stage === 3 && <ReceivedData setStage={setStage} scrapedData={scrapedData} />}
-        </>
-      )}
+     Hello, This is an react-extension-app made by me, <br></br>Shivansh Verma 😄.<br></br> <a href={`https://github.com/ShivanshVerma-coder/cra-for-extension.git`} target="_blank">Get started</a> Happy coding !!! 😉😉
     </div>
   )
 }

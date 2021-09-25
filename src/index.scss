@@ -3,14 +3,6 @@ html {
   min-width: 384px;
   min-height: 250px;
   margin: 0;
-  padding-bottom: 10px;
-  background: transparent;
-  background-image: url("./assets/images/bg.png");
-  background-size: fixed;
-  background-position: bottom;
-  border: 1px solid $aquamarineShade1;
-  background-position-x: -1px;
-  background-repeat: no-repeat;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -18,12 +10,14 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-width: 384px;
   min-height: 250px;
-  color: $blackShade1;
+  color: black;
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -34,7 +28,8 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 * {
