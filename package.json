@@ -1,7 +1,10 @@
 {
   "name": "automations-extension",
-  "version": "0.1.0",
+  "version": "1.0.1",
+  "description": "Start building an extension right-away",
   "private": true,
+  "author": "Shivansh Verma",
+  "license": "MIT",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -40,5 +43,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "repository": {
+    "type":"git",
+    "url": "git+https://github.com/ShivanshVerma-coder/cra-for-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShivanshVerma-coder/cra-for-extension/issues"
+  },
+  "homepage": "https://github.com/ShivanshVerma-coder/cra-for-extension#readme"
 }
