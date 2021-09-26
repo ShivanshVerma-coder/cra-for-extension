@@ -1,6 +1,6 @@
 {
   "name": "create-react-extension-app",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Start building an extension right-away",
   "author": "Shivansh Verma",
   "bin": "./bin/cli.js",
